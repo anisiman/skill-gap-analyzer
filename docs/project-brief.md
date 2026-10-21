@@ -48,6 +48,7 @@ resumes
 - id
 - user_id   (foreign key → users)
 - original_filename
+- file_path (this is where we saved it)
 - extracted_text
 - timestamps
 
@@ -64,9 +65,9 @@ analyses
 - resume_id (foreign key -> resumes)
 - job_description_id (foreign key->job_descriptions)
 - ai_model
-- file_path (this is where we saved it)
 - job_score
 - result
+- timestamp
 
 # 9. Pages
 | Page              | What the user does                     | Requirement |
