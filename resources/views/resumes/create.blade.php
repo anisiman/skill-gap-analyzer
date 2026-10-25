@@ -1,6 +1,9 @@
 <x-layouts::app :title="__('Upload Resume')">
     <div class="max-w-xl">
         <h1 class="text-2xl font-semibold mb-4">Upload your resume</h1>
+        @if (session('status'))
+            <p class="mb-4 text-green-600">{{ session('status')}}</p>
+        @endif
         <form method="POST" action="{{ route('resumes.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
