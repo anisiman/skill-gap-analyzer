@@ -21,13 +21,14 @@ class ResumeController extends Controller
 
         $path = $request->file('resume')->store('resumes');
 
-        $parser = new Parser(); // create pDF-reading tool
+        $parser = new Parser; // create pDF-reading tool
         $fullPath = Storage::path($path);
         $pdf = $parser->parseFile($fullPath);
         $text = $pdf->getText();
 
-        if(trim($text)===''){
+        if (trim($text) === '') {
             Storage::delete($path);
+
             return back()->withErrors(['resume' => 'No text found in this PDF. Please upload a text-based PDF.']);
         }
 
@@ -35,7 +36,7 @@ class ResumeController extends Controller
         $filename = $request->file('resume')->getClientOriginalName();
 
         $resume = $user->resumes()->create([
-            'original_filename'=> $filename,
+            'original_filename' => $filename,
             'file_path' => $path,
             'extracted_text' => $text,
         ]);
