@@ -26,6 +26,11 @@ class ResumeController extends Controller
         $pdf = $parser->parseFile($fullPath);
         $text = $pdf->getText();
 
+        if(trim($text)===''){
+            Storage::delete($path);
+            return back()->withErrors(['resume' => 'No text found in this PDF. Please upload a text-based PDF.']);
+        }
+
         $user = $request->user();
         $filename = $request->file('resume')->getClientOriginalName();
 
